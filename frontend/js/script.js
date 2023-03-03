@@ -23,7 +23,6 @@ async function checkUser() {
       console.info(err + " url: " + url);
   });
     //.then(response => console.log(JSON.stringify(response)))
-    window.location.href = "http://www.w3schools.com";     
   }
 
   function createUser() {

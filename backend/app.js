@@ -18,6 +18,7 @@ app.post('/checkUser', (req, res) => {
     let data = JSON.stringify(req.body);
     console.log(data);
     res.send('Data Received: ' + data);
+    res.redirect('http://www.w3schools.com')
   })
 
 app.post('/createUser', (req, res) => {
