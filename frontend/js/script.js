@@ -1,3 +1,49 @@
+//Index
+
+async function checkUser() {
+    await fetch('http://localhost:3000/checkUser', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({
+        "loginName": document.getElementById('loginName').value,
+        "loginPassword": document.getElementById('loginPassword').value,
+      })
+    })
+      .then(response => response.json())
+      .then(response => {
+      // HTTP 301 response
+      // HOW CAN I FOLLOW THE HTTP REDIRECT RESPONSE?
+      
+  })
+  .catch(function(err) {
+      console.info(err + " url: " + url);
+  });
+    //.then(response => console.log(JSON.stringify(response)))
+    window.location.href = "http://www.w3schools.com";     
+  }
+
+  function createUser() {
+    fetch('http://localhost:3000/createUser', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({
+        "signUpName": document.getElementById('signUpName').value,
+        "signUpPassword": document.getElementById('signUpPassword').value,
+        "signUpPasswordRepeat": document.getElementById('signUpPasswordRepeat').value
+      })
+    })
+      .then(response => response.json())
+  }
+
+//Admin View
 var selectedRow = null
 
 function onFormSubmit() {
@@ -32,8 +78,8 @@ function insertNewRecord(data) {
     cell4 = newRow.insertCell(3);
     cell4.innerHTML = data.city;
     cell4 = newRow.insertCell(4);
-    cell4.innerHTML = `<a onClick="onEdit(this)">Edit</a>
-                       <a onClick="onDelete(this)">Delete</a>`;
+    cell4.innerHTML = `<button onClick="onEdit(this)" class="btn btn-info">Edit</button>
+                       <button onClick="onDelete(this)" class="btn btn-danger">Delete</button>`;
 }
 
 function resetForm() {

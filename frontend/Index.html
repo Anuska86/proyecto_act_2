@@ -2,6 +2,8 @@
 
 <head>
   <link rel="stylesheet" href="styles/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -69,52 +71,7 @@
     </form>
   </div>
 
-  <script>
-/*
-// Get the modal
-    var modal = document.getElementById('logIn');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-*/
-    function checkUser() {
-      fetch('http://localhost:3000/checkUser', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        },
-        body: JSON.stringify({
-          "loginName": document.getElementById('loginName').value,
-          "loginPassword": document.getElementById('loginPassword').value,
-        })
-      })
-        .then(response => response.json())
-      //.then(response => console.log(JSON.stringify(response)))
-    }
-
-    function createUser() {
-      fetch('http://localhost:3000/createUser', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        },
-        body: JSON.stringify({
-          "signUpName": document.getElementById('signUpName').value,
-          "signUpPassword": document.getElementById('signUpPassword').value,
-          "signUpPasswordRepeat": document.getElementById('signUpPasswordRepeat').value
-        })
-      })
-        .then(response => response.json())
-    }
-  </script>
+  <script src="js/script.js"></script>
 
 </body>
 
