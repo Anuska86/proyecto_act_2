@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h2>Modal Signup Foklkikiurm</h2>
+
+  <button onclick="document.getElementById('signUp').style.display='block'" style="width:auto;">Sign Up</button>
+  <button onclick="document.getElementById('logIn').style.display='block'" style="width:auto;">Login</button>
+
+  <div id="logIn" class="modal">
+
+    <form class="modal-content animate" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('logIn').style.display='none'" class="close"
+          title="Close Modal">&times;</span>
+        <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input id="loginName" type="text" placeholder="Enter Username" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input id="loginPassword" type="password" placeholder="Enter Password" name="psw" required>
+
+        <button onclick="checkUser()">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </div>
+
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('logIn').style.display='none'"
+          class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+    </form>
+  </div>
+
+  <div id="signUp" class="modal">
+    <span onclick="document.getElementById('signUp').style.display='none'" class="close"
+      title="Close Modal">&times;</span>
+    <form class="modal-content">
+      <div class="container">
+        <h1>Sign Up</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+        <label for="email"><b>Name</b></label>
+        <input id="signUpName" type="text" placeholder="Enter name" name="signUpName" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input id="signUpPassword" type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input id="signUpPasswordRepeat" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('signUp').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <button onclick="createUser()" class="signupbtn">Sign Up</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+/*
+// Get the modal
+    var modal = document.getElementById('logIn');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+*/
+    function checkUser() {
+      fetch('http://localhost:3000/checkUser', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({
+          "loginName": document.getElementById('loginName').value,
+          "loginPassword": document.getElementById('loginPassword').value,
+        })
+      })
+        .then(response => response.json())
+      //.then(response => console.log(JSON.stringify(response)))
+    }
+
+    function createUser() {
+      fetch('http://localhost:3000/createUser', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({
+          "signUpName": document.getElementById('signUpName').value,
+          "signUpPassword": document.getElementById('signUpPassword').value,
+          "signUpPasswordRepeat": document.getElementById('signUpPasswordRepeat').value
+        })
+      })
+        .then(response => response.json())
+    }
+  </script>
+
+</body>
+
+</html>
