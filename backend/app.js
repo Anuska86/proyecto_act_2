@@ -1,63 +1,18 @@
-const express = require('express')
-const bodyParser = require('body-parser')
+var express = require('express');
+var bodyParser = require('body-parser');
 let cors = require('cors')
 
-//SQL
-var mysql = require('mysql');
+var connection = require('./app/config/connection');
+var routes = require('./app/controllers/routes');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "proyecto"
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
-async function getUsuarios(nombre,pass){
-    con.query(`SELECT * FROM usuario WHERE nombre_usuario='${nombre}' AND pass='${pass}'`, function (err, result, fields) {
-        if (err) throw err;
-        //console.log(result);
-        return result[0];
-      });
-}
-//Final de SQL
-const app = express()
- 
+var app = express();
 app.use(cors())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
-const port = 3000
+connection.init();
+routes.configure(app);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.post('/checkUser', (req, res) => {
-    //console.log(data["nombre_usuario"]);
-    let nombre_usuario = req.body.nombre_usuario;
-    let pass_usuario = req.body.pass;
-
-    const SQLResponse = async () => {
-      getUsuarios(nombre_usuario,pass_usuario)
-};
-
-    //SQLResponse = getUsuarios(nombre_usuario,pass_usuario)
-    console.log(SQLResponse);
-    res.send('Data Received: ' + JSON.stringify(req.body));
-    //res.redirect('http://www.w3schools.com')
-  })
-
-app.post('/createUser', (req, res) => {
-    let data = JSON.stringify(req.body);
-    console.log(data);
-    res.send('Data Received: ' + data);
-  })
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+var server = app.listen(8000, function(){
+  console.log('Server listening on port ' + server.address().port);
+});
