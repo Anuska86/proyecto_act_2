@@ -1,60 +1,76 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>
-        Vista administrador
-    </title>
-    <link rel="stylesheet" href="styles/style_admin_view.css">
+  <head>
+    <title>Vista administrador</title>
+    <link rel="stylesheet" href="styles/style_admin_view.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<body>
-
-	<h1><center>Vista administrador</center></h1>
-	<hr>
-			<div class="employee-form">
-                <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
-                    <div>
-                        <label>Name</label><label class="validation-error hide" id="user_nameValidationError">This field is required.</label>
-                        <input type="text" name="user_name" id="user_name">
-                    </div>
-                    <div>
-                        <label>Password</label>
-                        <input type="text" name="user_pass" id="user_pass">
-                    </div>
-                    <div>
-                        <label>Email</label>
-                        <input type="text" name="email" id="email">
-                    </div>
-                    <div>
-                        <label>Salario</label>
-                        <input type="number" name="salary" id="salary">
-                    </div>
-                    <div  class="form-action-buttons">
-                        <input type="submit" value="Guardar">
-                    </div>
-                </form>
-		</div>
-		<br/>
-		<div class = "employees-table">
-                <table class="list" id="employeeList">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Password</th>
-                            <th>Email</th>
-                            <th>Salario</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
+  <body>
+    <h1><center>Vista administrador</center></h1>
+    <hr />
+    <div class="employee-form">
+      <form
+        onsubmit="event.preventDefault();onFormSubmit();"
+        autocomplete="off"
+      >
+        <div>
+          <label>Name</label
+          ><label class="validation-error hide" id="user_nameValidationError"
+            >This field is required.</label
+          >
+          <input type="text" name="user_name" id="user_name" />
         </div>
+        <div>
+          <label>Password</label>
+          <input type="text" name="user_pass" id="user_pass" />
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="text" name="email" id="email" />
+        </div>
+        <div>
+          <label>Salario</label>
+          <input type="number" name="salary" id="salary" />
+        </div>
+        <div class="form-action-buttons">
+          <input type="submit" value="Guardar" />
+        </div>
+      </form>
+    </div>
+    <br />
+    <div class="employees-table">
+      <table class="list" id="employeeList">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>Salario</th>
+            <th>Acciones</th>
+            <th>ID</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
     <script src="js/script.js"></script>
-</body>
+
+    <script>
+      $(document).ready(function () {
+        getUsers();
+      });
+    </script>
+  </body>
 </html>

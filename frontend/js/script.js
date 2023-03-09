@@ -18,6 +18,30 @@
   });
 })()
 
+function getUsers() {
+  fetch(`http://localhost:8000/usuario`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      insertNewRecordFromDB(data);
+    })
+.catch(function(err) {
+    console.info(err );
+});
+}
+
+function createTable(response){
+  console.log(response)
+}
+
 function checkUser() {
   let loginName = document.getElementById('user_input').value;
   let loginPassword = document.getElementById('pass_input').value;
@@ -92,8 +116,9 @@ function onFormSubmit() {
     if (validate()) {
         var formData = readFormData();
         if (selectedRow == null){
-            insertNewRecord(formData);
+            //insertNewRecord(formData);
             createUser(formData);
+            getUsers()
         }
         
         else{
@@ -124,9 +149,29 @@ function insertNewRecord(data) {
     cell3.innerHTML = data.email;
     cell4 = newRow.insertCell(3);
     cell4.innerHTML = data.salary;
-    cell4 = newRow.insertCell(4);
-    cell4.innerHTML = `<button onClick="onEdit(this)" class="btn btn-info">Edit</button>
+    cell5 = newRow.insertCell(4);
+    cell5.innerHTML = `<button onClick="onEdit(this)" class="btn btn-info">Edit</button>
                        <button onClick="onDelete(this)" class="btn btn-danger">Delete</button>`;
+}
+
+function insertNewRecordFromDB(data) {
+  var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
+  for (var i = 0; i < data.length; i++) {
+  var newRow = table.insertRow(table.length);
+  cell1 = newRow.insertCell(0);
+  cell1.innerHTML = data[i].nombre_usuario;
+  cell2 = newRow.insertCell(1);
+  cell2.innerHTML = data[i].pass;
+  cell3 = newRow.insertCell(2);
+  cell3.innerHTML = data[i].email;
+  cell4 = newRow.insertCell(3);
+  cell4.innerHTML = data[i].salario;
+  cell5 = newRow.insertCell(4);
+  cell5.innerHTML = `<button onClick="onEdit(this)" class="btn btn-info">Edit</button>
+                     <button onClick="onDelete(this)" class="btn btn-danger">Delete</button>`;
+  cell6 = newRow.insertCell(5);
+  cell6.innerHTML = data[i].id;
+  }
 }
 
 function resetForm() {
