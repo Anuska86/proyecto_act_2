@@ -109,6 +109,20 @@ function toogleChecks(isValid){
       .then(response => response.json())
   }
 
+
+  function deleteFromDB(td){
+    let id = parseInt(td.parentElement.parentElement.lastElementChild.textContent)
+    fetch(`http://localhost:8000/usuario/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
+      .then(response => response.json())
+  }
+
 //Admin View
 var selectedRow = null
 
@@ -200,6 +214,7 @@ function onDelete(td) {
     if (confirm('Are you sure to delete this record ?')) {
         row = td.parentElement.parentElement;
         document.getElementById("employeeList").deleteRow(row.rowIndex);
+        deleteFromDB(td);
         resetForm();
     }
 }
