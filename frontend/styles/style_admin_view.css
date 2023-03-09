@@ -82,3 +82,9 @@ label.validation-error{
 .hide{
   display:none;
 }
+
+
+.fullWidth {
+  display: block;
+  width: 100%;
+}

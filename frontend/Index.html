@@ -8,16 +8,16 @@
 </head>
 
 <body>
-  <div id="logIn">
+  <div id="logIn" class="center">
 
     <form>
       Username<br />
-      <input type="text" id="user_input" name="username" /><br />
+      <input type="text" id="user_input" name="username" class="center-text"/><br />
       Password<br />
-      <input type="password" id="pass_input" name="password" /><br />
+      <input type="password" id="pass_input" name="password" class="center-text"/><br />
       <input id="loginBtn" class="btn btn-primary btn-lg btn-block" value="Login" disabled="disabled" onclick="checkUser()"/>
-      <a id="admin_link" href="./adminView.html" style="display:none">A la web!!</a>
-      <div id="admin_link_alert" class="alert alert-danger" role="alert" style="display:none">
+      <a id="admin_link" href="./adminView.html" style="display:none;margin-top: 2em;">A la web!!</a>
+      <div id="admin_link_alert" class="alert alert-danger" role="alert" style="display:none;">
         Datos incorrectos
       </div>
   </form>

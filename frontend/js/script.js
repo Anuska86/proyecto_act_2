@@ -1,5 +1,3 @@
-//Index
-
 (function() {
   $('form > input').keyup(function() {
 
@@ -38,10 +36,6 @@ function getUsers() {
 });
 }
 
-function createTable(response){
-  console.log(response)
-}
-
 function checkUser() {
   let loginName = document.getElementById('user_input').value;
   let loginPassword = document.getElementById('pass_input').value;
@@ -54,15 +48,15 @@ function checkUser() {
     },
   })
     .then(response => response.json())
-    .then(response => response[0]?toogleChecks(true):toogleChecks(false))
+    .then(response => response[0]?toogleChecks(true,response[0]):toogleChecks(false,response[0]))
 .catch(function(err) {
     console.info(err );
 });
 }
 
 
-function toogleChecks(isValid){
-  if(isValid){
+function toogleChecks(isValid,response){
+  if(isValid && response.tipo==='Administrador'){
     document.getElementById('admin_link').style.display="block";
     document.getElementById('admin_link_alert').style.display="none";
   }else{
@@ -124,11 +118,10 @@ function toogleChecks(isValid){
       .then(response => response.json())
   }
 
-//Admin View
 var selectedRow = null
 
 function onFormSubmit() {
-    if (validate()) {
+    if (validate() && validatePass() && validateEmail()) {
         var formData = readFormData();
         if (selectedRow == null){
             //insertNewRecord(formData);
@@ -170,6 +163,7 @@ function insertNewRecord(data) {
 }
 
 function insertNewRecordFromDB(data) {
+  document.getElementById("employeeList").getElementsByTagName('tbody')[0].replaceChildren();
   var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
   for (var i = 0; i < data.length; i++) {
   var newRow = table.insertRow(table.length);
@@ -233,4 +227,30 @@ function validate() {
             document.getElementById("user_nameValidationError").classList.add("hide");
     }
     return isValid;
+}
+
+function validatePass() {
+  isValid = true;
+  if (document.getElementById("user_pass").value == "") {
+      isValid = false;
+      document.getElementById("user_passValidationError").classList.remove("hide");
+  } else {
+      isValid = true;
+      if (!document.getElementById("user_passValidationError").classList.contains("hide"))
+          document.getElementById("user_passValidationError").classList.add("hide");
+  }
+  return isValid;
+}
+
+function validateEmail() {
+  isValid = true;
+  if (document.getElementById("email").value == "") {
+      isValid = false;
+      document.getElementById("emailValidationError").classList.remove("hide");
+  } else {
+      isValid = true;
+      if (!document.getElementById("emailValidationError").classList.contains("hide"))
+          document.getElementById("emailValidationError").classList.add("hide");
+  }
+  return isValid;
 }
