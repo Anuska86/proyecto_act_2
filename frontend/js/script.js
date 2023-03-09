@@ -90,8 +90,9 @@ function toogleChecks(isValid){
       .then(response => response.json())
   }
 
-  function updateUser(formData) {
-    fetch('http://localhost:8000/usuario', {
+  function updateFromDB(td,formData) {
+    let id = parseInt(td)
+    fetch(`http://localhost:8000/usuario/${id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -137,7 +138,7 @@ function onFormSubmit() {
         
         else{
             updateRecord(formData);
-            updateUser(formData);
+            //updateUser(formData);
         }
         resetForm();
     }
@@ -202,12 +203,15 @@ function onEdit(td) {
     document.getElementById("user_pass").value = selectedRow.cells[1].innerHTML;
     document.getElementById("email").value = selectedRow.cells[2].innerHTML;
     document.getElementById("salary").value = selectedRow.cells[3].innerHTML;
+    localStorage.setItem('editValue', td.parentElement.parentElement.lastElementChild.textContent);
 }
 function updateRecord(formData) {
     selectedRow.cells[0].innerHTML = formData.user_name;
     selectedRow.cells[1].innerHTML = formData.user_pass;
     selectedRow.cells[2].innerHTML = formData.email;
     selectedRow.cells[3].innerHTML = formData.salary;
+    let td = localStorage.getItem('editValue');
+    updateFromDB(td,formData);
 }
 
 function onDelete(td) {
